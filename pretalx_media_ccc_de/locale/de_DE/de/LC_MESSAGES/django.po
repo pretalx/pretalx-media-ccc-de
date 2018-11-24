@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-15 01:02-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Tobias Kunze\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: local/pretalx-plugin-cookiecutter/pretalx-media-ccc-de/pretalx_media_ccc_de/__init__.py:10
+msgid "media.ccc.de recordings"
+msgstr ""
+
+#: local/pretalx-plugin-cookiecutter/pretalx-media-ccc-de/pretalx_media_ccc_de/__init__.py:12
+msgid "Pull recordings from media.ccc.de and embed them in talk pages"
+msgstr ""

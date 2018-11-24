@@ -1,0 +1,3 @@
+recursive-include pretalx_media_ccc_de/static *
+recursive-include pretalx_media_ccc_de/templates *
+recursive-include pretalx_media_ccc_de/locale *
