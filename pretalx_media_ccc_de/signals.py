@@ -10,12 +10,12 @@ from .recording import MediaCCCDe
 
 
 @receiver(register_recording_provider)
-def media_ccc_de_provider(sender, request):
+def media_ccc_de_provider(sender, request, **kwargs):
     return MediaCCCDe(request)
 
 
 @receiver(periodic_task)
-def gather_media_ccc_de_urls(sender, request):
+def gather_media_ccc_de_urls(sender, request, **kwargs):
     active_events = Event.objects.filter(plugins__icontains='media_ccc_de')
     for event in active_events:
         if not 'media_ccc_de' in event.get_plugins():
