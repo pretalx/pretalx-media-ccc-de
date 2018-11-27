@@ -15,7 +15,7 @@ class MediaCCCDe(BaseRecordingProvider):
     def get_recording(self, submission):
         if not self.event.settings.media_ccc_de_id:
             return None
-        path = self.event.settings.get(f'media_ccc_de_url_{submission.slug}')
+        path = self.event.settings.get(f'media_ccc_de_url_{submission.code}')
         if not path:
             return None
         iframe = f'<div class="embed-responsive embed-responsive-16by9"><iframe src="{path}/oembed" frameborder="0" allowfullscreen></iframe></div>'
