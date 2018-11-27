@@ -13,8 +13,8 @@ from .recording import MediaCCCDe
 
 
 @receiver(register_recording_provider)
-def media_ccc_de_provider(sender, request, **kwargs):
-    return MediaCCCDe(request)
+def media_ccc_de_provider(sender, **kwargs):
+    return MediaCCCDe(sender)
 
 
 @receiver(periodic_task)
