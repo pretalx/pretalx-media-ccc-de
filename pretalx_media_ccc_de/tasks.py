@@ -1,5 +1,10 @@
+import json
+from contextlib import suppress
+
+import requests
 from pretalx.celery_app import app
 from pretalx.event.models import Event
+from pretalx.submission.models import Submission
 
 
 @app.task()
@@ -26,5 +31,5 @@ def task_refresh_recording_urls(event_slug):
                     event=event, pk=talk['slug'].split('-')[1]
                 )
                 event.settings.set(
-                    f'media_ccc_de_url_{submission.slug}', talk['frontend_link']
+                    f'media_ccc_de_url_{submission.code}', talk['frontend_link']
                 )
