@@ -9,7 +9,7 @@ class MediaCCCDe(BaseRecordingProvider):
     def fill_recording_urls(self):
         if not self.event.settings.media_ccc_de_id:
             return None
-        task_refresh_recording_urls.apply_async()
+        task_refresh_recording_urls.apply_async(kwargs={'event_slug': self.event.slug})
 
 
     def get_recording(self, submission):
