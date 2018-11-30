@@ -30,6 +30,8 @@ def task_refresh_recording_urls(event_slug):
                 submission = Submission.objects.get(
                     event=event, pk=talk['slug'].split('-')[1]
                 )
-                event.settings.set(
-                    f'media_ccc_de_url_{submission.code}', talk['frontend_link']
-                )
+                key = f'media_ccc_de_url_{submission.code}'
+                if not event.settings.get(key):
+                    event.settings.set(
+                        key, talk['frontend_link']
+                    )
