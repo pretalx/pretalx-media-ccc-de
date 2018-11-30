@@ -7,14 +7,10 @@ from .tasks import task_refresh_recording_urls
 class MediaCCCDe(BaseRecordingProvider):
 
     def fill_recording_urls(self):
-        if not self.event.settings.media_ccc_de_id:
-            return None
         task_refresh_recording_urls.apply_async(kwargs={'event_slug': self.event.slug})
 
 
     def get_recording(self, submission):
-        if not self.event.settings.media_ccc_de_id:
-            return None
         path = self.event.settings.get(f'media_ccc_de_url_{submission.code}')
         if not path:
             return None

@@ -15,7 +15,7 @@ def task_refresh_recording_urls(event_slug):
         return
 
     if not event.settings.media_ccc_de_id:
-        return None
+        event.settings.media_ccc_de_id = event.slug
 
     response = requests.get(
         f'https://media.ccc.de/public/conferences/{event.settings.media_ccc_de_id}'
