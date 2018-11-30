@@ -29,4 +29,18 @@
   </div>
 </form>
 
+<h3>{% trans "Change URLs" %}</h3>
+
+{% for sform in url_forms %}
+  <form method="post">
+  {% csrf_token %}
+    <button name="action" value="url_{{ sform.submission.code }}" type="submit" class="btn btn-info float-right">
+      <i class="fa fa-check"></i>
+    </button>
+    <div class="mr-5">
+    {% bootstrap_form sform layout='event' %}
+    </div>
+  </form>
+{% endfor %}
+
 {% endblock %}

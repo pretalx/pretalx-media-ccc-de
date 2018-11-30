@@ -27,24 +27,27 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
                 request, _('Looking for new talks – this may take a while.')
             )
             MediaCCCDe(request.event).fill_recording_urls()
+            return super().post(request, *args, **kwargs)
 
-        elif action.startswith('url'):
+        if action.startswith('url'):
             code = action.lstrip('url_')
             try:
                 submission = request.event.submissions.get(code=code)
             except Submission.DoesNotExist:
-                messages.error(_('Could not find this talk.'))
-                return super().post(request, *args, **kwargs)
+                messages.error(request, _('Could not find this talk.'))
+                return super().get(request, *args, **kwargs)
 
             form = MediaCCCDeUrlForm(request.POST, submission=submission)
             if not form.is_valid():
-                messages.error(form.errors)
+                messages.error(request, form.errors)
+                return super().get(request, *args, **kwargs)
             else:
                 request.event.settings.set(
                     f'media_ccc_de_url_{submission.code}',
                     form.cleaned_data['media_ccc_de_url'],
                 )
-                messages.success(_('The URL for this talk was overridden.'))
+                messages.success(request, _('The URL for this talk was overridden.'))
+                return super().get(request, *args, **kwargs)
 
         return super().post(request, *args, **kwargs)
 
@@ -55,8 +58,8 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
         kwargs = super().get_form_kwargs()
         return {'obj': self.request.event, 'attribute_name': 'settings', **kwargs}
 
-    def get_context_data(self):
-        kwargs = super().get_context_data()
+    def get_context_data(self, *args, **kwargs):
+        kwargs = super().get_context_data(**kwargs)
         kwargs['url_forms'] = [
             MediaCCCDeUrlForm(submission=submission)
             for submission in self.request.event.talks
