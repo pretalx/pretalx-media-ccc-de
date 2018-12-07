@@ -4,7 +4,6 @@ from .tasks import task_refresh_recording_urls
 
 
 class MediaCCCDe(BaseRecordingProvider):
-
     def fill_recording_urls(self):
         task_refresh_recording_urls.apply_async(kwargs={'event_slug': self.event.slug})
 

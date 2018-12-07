@@ -32,6 +32,4 @@ def task_refresh_recording_urls(event_slug):
                 )
                 key = f'media_ccc_de_url_{submission.code}'
                 if not event.settings.get(key):
-                    event.settings.set(
-                        key, talk['frontend_link']
-                    )
+                    event.settings.set(key, talk['frontend_link'])

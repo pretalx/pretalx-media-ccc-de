@@ -32,8 +32,14 @@ def gather_media_ccc_de_urls(sender, request, **kwargs):
 def media_ccc_de_settings(sender, request, **kwargs):
     if not request.user.has_perm('orga.change_settings', request.event):
         return []
-    return [{
-        'label': 'media.ccc.de',
-        'url': reverse('plugins:pretalx_media_ccc_de:settings', kwargs={'event': request.event.slug}),
-        'active': request.resolver_match.url_name == 'plugins:pretalx_media_ccc_de:settings'
-    }]
+    return [
+        {
+            'label': 'media.ccc.de',
+            'url': reverse(
+                'plugins:pretalx_media_ccc_de:settings',
+                kwargs={'event': request.event.slug},
+            ),
+            'active': request.resolver_match.url_name
+            == 'plugins:pretalx_media_ccc_de:settings',
+        }
+    ]
