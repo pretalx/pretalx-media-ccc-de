@@ -1,5 +1,4 @@
 from pretalx.agenda.recording import BaseRecordingProvider
-from pretalx.submission.models import Submission
 
 from .tasks import task_refresh_recording_urls
 
@@ -8,7 +7,6 @@ class MediaCCCDe(BaseRecordingProvider):
 
     def fill_recording_urls(self):
         task_refresh_recording_urls.apply_async(kwargs={'event_slug': self.event.slug})
-
 
     def get_recording(self, submission):
         path = self.event.settings.get(f'media_ccc_de_url_{submission.code}')

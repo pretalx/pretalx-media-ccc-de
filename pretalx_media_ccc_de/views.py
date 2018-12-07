@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 from pretalx.common.mixins.views import PermissionRequired
-from pretalx.submission.models import Submission, SubmissionStates
+from pretalx.submission.models import Submission
 
 from .forms import MediaCCCDeSettingsForm, MediaCCCDeUrlForm
 from .recording import MediaCCCDe
