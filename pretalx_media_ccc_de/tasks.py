@@ -10,7 +10,7 @@ from pretalx.submission.models import Submission
 @app.task()
 def task_refresh_recording_urls(event_slug):
     try:
-        event = Event.objects.get(slug=event_slug)
+        event = Event.objects.get(slug__iexact=event_slug)
     except Event.DoesNotExist:
         return
 
@@ -28,7 +28,7 @@ def task_refresh_recording_urls(event_slug):
         if talk.get('frontend_link'):
             with suppress(Submission.DoesNotExist):
                 submission = Submission.objects.get(
-                    event=event, pk=talk['slug'].split('-')[1]
+                    event=event, code__iexact=talk['slug'].split('-')[1]
                 )
                 key = f'media_ccc_de_url_{submission.code}'
                 if not event.settings.get(key):
