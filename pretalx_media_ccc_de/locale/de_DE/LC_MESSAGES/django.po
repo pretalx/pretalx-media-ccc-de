@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 23:44+0000\n"
+"POT-Creation-Date: 2018-12-21 13:23+0000\n"
 "PO-Revision-Date: 2018-11-28 00:47+0100\n"
+"Last-Translator: Tobias Kunze <r@rixx.de>\n"
+"Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Tobias Kunze <r@rixx.de>\n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.2\n"
 
 #: local/pretalx-media-ccc-de/pretalx_media_ccc_de/__init__.py:10
@@ -26,16 +26,20 @@ msgid "Pull recordings from media.ccc.de and embed them in talk pages"
 msgstr ""
 "Aufzeichnungen von media.ccc.de erfassen und auf Vortragsseiten einbetten"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:14
-#, python-brace-format
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:17
+#, fuzzy, python-brace-format
+#| msgid ""
+#| "The slug or ID used for your event in the media.ccc.de API – for example "
+#| "your event slug. Your event's data has to be available at <a href="
+#| "\"{url}\">{url}</a>"
 msgid ""
-"The slug or ID used for your event in the media.ccc.de API – for example "
+"The slug or ID used for your event in the media.ccc.de API – defaults to "
 "your event slug. Your event's data has to be available at <a href="
 "\"{url}\">{url}</a>"
 msgstr ""
 "Die Kurzform oder ID, die für die Veranstaltung in der media.ccc.de-API "
-"genutzt wird – zum Beispiel die Kurzform der Veranstaltung. Die Daten "
-"müssen unter <a href=\"{url}\">{url}</a> zu finden sein"
+"genutzt wird – zum Beispiel die Kurzform der Veranstaltung. Die Daten müssen "
+"unter <a href=\"{url}\">{url}</a> zu finden sein"
 
 #: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:7
 msgid "Set up media.ccc.de sync"
@@ -49,7 +53,19 @@ msgstr "Speichern"
 msgid "Check for new talks"
 msgstr "Nach Aufzeichnungen suchen"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:24
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:32
+msgid "Change URLs"
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:27
 msgid "Looking for new talks – this may take a while."
 msgstr ""
 "Auchzeichnungen werden synchronisiert – das kann einen Augenblick dauern."
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:37
+msgid "Could not find this talk."
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:49
+msgid "The URL for this talk was overridden."
+msgstr ""
