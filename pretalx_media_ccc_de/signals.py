@@ -17,7 +17,7 @@ def media_ccc_de_provider(sender, **kwargs):
 
 
 @receiver(periodic_task)
-def gather_media_ccc_de_urls(sender, request, **kwargs):
+def gather_media_ccc_de_urls(**kwargs):
     active_events = Event.objects.filter(plugins__icontains='media_ccc_de')
     for event in active_events:
         if 'media_ccc_de' not in event.get_plugins() or now().date() < event.date_from:
