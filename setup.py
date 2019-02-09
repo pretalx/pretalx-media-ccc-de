@@ -25,7 +25,7 @@ cmdclass = {
 
 setup(
     name='pretalx-media-ccc-de',
-    version='0.0.2',
+    version='0.1.0',
     description='Pull recordings from media.ccc.de and embed them in talk pages',
     long_description=long_description,
     url='https://github.com/pretalx/pretalx-media-ccc-de.git',
