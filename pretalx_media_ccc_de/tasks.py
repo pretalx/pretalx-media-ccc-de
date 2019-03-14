@@ -26,10 +26,23 @@ def task_refresh_recording_urls(event_slug):
     structure = json.loads(response.content.decode())
     for talk in structure.get('events', []):
         if talk.get('frontend_link'):
-            with suppress(Submission.DoesNotExist):
-                submission = Submission.objects.get(
-                    event=event, code__iexact=talk['slug'].split('-')[1]
-                )
+            submission = None
+            link = talk.get('link')
+            if link:
+                with suppress(Submission.DoesNotExist):
+                    submission = Submission.objects.get(
+                        event=event, code__iexact=talk['link'].rstrip('/').rsplit('/', maxsplit=1)[-1]
+                    )
+            if not submission:
+                with suppress(Submission.DoesNotExist):
+                    submission = Submission.objects.get(
+                        event=event, pk__iexact=talk['slug'].split('-')[1]
+                    )
+                with suppress(Submission.DoesNotExist):
+                    submission = Submission.objects.get(
+                        event=event, code__iexact=talk['slug'].split('-')[1]
+                    )
+            if submission:
                 key = f'media_ccc_de_url_{submission.code}'
                 if not event.settings.get(key):
                     event.settings.set(key, talk['frontend_link'])
