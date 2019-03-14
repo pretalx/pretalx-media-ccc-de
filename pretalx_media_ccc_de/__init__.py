@@ -11,7 +11,7 @@ class PluginApp(AppConfig):
         author = 'Tobias Kunze'
         description = ugettext_lazy('Pull recordings from media.ccc.de and embed them in talk pages')
         visible = True
-        version = '0.1.0'
+        version = '0.2.0'
 
     def ready(self):
         from . import signals  # NOQA
