@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-10 14:10+0000\n"
+"POT-Creation-Date: 2019-06-02 10:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "media.ccc.de recordings"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/__init__.py:12
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/__init__.py:13
 msgid "Pull recordings from media.ccc.de and embed them in talk pages"
 msgstr ""
 

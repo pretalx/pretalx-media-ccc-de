@@ -31,7 +31,10 @@ def task_refresh_recording_urls(event_slug):
             if link:
                 with suppress(Submission.DoesNotExist):
                     submission = Submission.objects.get(
-                        event=event, code__iexact=talk['link'].rstrip('/').rsplit('/', maxsplit=1)[-1]
+                        event=event,
+                        code__iexact=talk['link']
+                        .rstrip('/')
+                        .rsplit('/', maxsplit=1)[-1],
                     )
             if not submission:
                 with suppress(Submission.DoesNotExist):

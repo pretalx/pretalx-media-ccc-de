@@ -9,7 +9,9 @@ class PluginApp(AppConfig):
     class PretalxPluginMeta:
         name = ugettext_lazy('media.ccc.de recordings')
         author = 'Tobias Kunze'
-        description = ugettext_lazy('Pull recordings from media.ccc.de and embed them in talk pages')
+        description = ugettext_lazy(
+            'Pull recordings from media.ccc.de and embed them in talk pages'
+        )
         visible = True
         version = '0.2.0'
 

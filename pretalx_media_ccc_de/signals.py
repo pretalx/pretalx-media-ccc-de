@@ -20,7 +20,7 @@ def media_ccc_de_provider(sender, **kwargs):
 def gather_media_ccc_de_urls(**kwargs):
     active_events = Event.objects.filter(plugins__icontains='media_ccc_de')
     for event in active_events:
-        if 'media_ccc_de' not in event.get_plugins() or now().date() < event.date_from:
+        if 'media_ccc_de' not in event.plugin_list or now().date() < event.date_from:
             continue
         last_check = event.settings.media_ccc_de_check
         event_active = (now().date() - event.date_to) <= timedelta(days=7)
