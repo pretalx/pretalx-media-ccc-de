@@ -30,7 +30,7 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
             return super().post(request, *args, **kwargs)
 
         if action.startswith('url'):
-            code = action.lstrip('url_')
+            code = action[len('url_'):]
             try:
                 submission = request.event.submissions.get(code=code)
             except Submission.DoesNotExist:
