@@ -1,4 +1,4 @@
-from datetime import timedelta
+import datetime as dt
 
 from django.dispatch import receiver
 from django.urls import reverse
@@ -26,8 +26,8 @@ def gather_media_ccc_de_urls(**kwargs):
             if 'media_ccc_de' not in event.plugin_list or now().date() < event.date_from:
                 continue
             last_check = event.settings.media_ccc_de_check
-            event_active = (now().date() - event.date_to) <= timedelta(days=7)
-            if not last_check or (now() - last_check > timedelta(hours=1) and event_active):
+            event_active = (now().date() - event.date_to) <= dt.timedelta(days=7)
+            if not last_check or (now() - last_check > dt.timedelta(hours=1) and event_active):
                 MediaCCCDe(event).fill_recording_urls()
 
 
