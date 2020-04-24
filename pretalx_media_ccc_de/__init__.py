@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 
 class PluginApp(AppConfig):
@@ -7,9 +7,9 @@ class PluginApp(AppConfig):
     verbose_name = 'media.ccc.de recordings'
 
     class PretalxPluginMeta:
-        name = ugettext_lazy('media.ccc.de recordings')
+        name = gettext_lazy('media.ccc.de recordings')
         author = 'Tobias Kunze'
-        description = ugettext_lazy(
+        description = gettext_lazy(
             'Pull recordings from media.ccc.de and embed them in talk pages'
         )
         visible = True
