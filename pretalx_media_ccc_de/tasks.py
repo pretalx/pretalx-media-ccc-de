@@ -3,6 +3,7 @@ from contextlib import suppress
 
 import requests
 from django_scopes import scope, scopes_disabled
+
 from pretalx.celery_app import app
 from pretalx.event.models import Event
 from pretalx.submission.models import Submission
