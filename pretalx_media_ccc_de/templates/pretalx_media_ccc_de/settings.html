@@ -4,43 +4,43 @@
 
 {% block content %}
 
-<h2>{% trans "Set up media.ccc.de sync" %}</h2>
-<form method="post">
-  {% csrf_token %}
-  {% bootstrap_form form layout='event' %}
-  <div class="submit-group panel">
-      <span></span>
-      <span class="d-flex flex-row-reverse">
-          <button
-            type="submit" class="btn btn-success btn-lg"
-            name="action" value="save"
-          >
-              <i class="fa fa-check"></i>
-              {% trans "Save" %}
-          </button>
-          <button
-            name="action" value="regenerate"
-            type="submit" class="btn btn-info btn-lg mr-2"
-          >
-              <i class="fa fa-refresh"></i>
-              {% trans "Check for new talks" %}
-          </button>
-      </span>
-  </div>
-</form>
+    <h2>{% trans "Set up media.ccc.de sync" %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='event' %}
+        <div class="submit-group panel">
+            <span></span>
+            <span class="d-flex flex-row-reverse">
+                <button
+                    type="submit" class="btn btn-success btn-lg"
+                    name="action" value="save"
+                >
+                    <i class="fa fa-check"></i>
+                    {% trans "Save" %}
+                </button>
+                <button
+                    name="action" value="regenerate"
+                    type="submit" class="btn btn-info btn-lg mr-2"
+                >
+                    <i class="fa fa-refresh"></i>
+                    {% trans "Check for new talks" %}
+                </button>
+            </span>
+        </div>
+    </form>
 
-<h3>{% trans "Change URLs" %}</h3>
+    <h3>{% trans "Change URLs" %}</h3>
 
-{% for sform in url_forms %}
-  <form method="post">
-  {% csrf_token %}
-    <button name="action" value="url_{{ sform.submission.code }}" type="submit" class="btn btn-info float-right">
-      <i class="fa fa-check"></i>
-    </button>
-    <div class="mr-5">
-    {% bootstrap_form sform layout='event' %}
-    </div>
-  </form>
-{% endfor %}
+    {% for sform in url_forms %}
+        <form method="post">
+            {% csrf_token %}
+            <button name="action" value="url_{{ sform.submission.code }}" type="submit" class="btn btn-info float-right">
+                <i class="fa fa-check"></i>
+            </button>
+            <div class="mr-5">
+                {% bootstrap_form sform layout='event' %}
+            </div>
+        </form>
+    {% endfor %}
 
 {% endblock %}
