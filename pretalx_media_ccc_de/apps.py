@@ -18,6 +18,3 @@ class PluginApp(AppConfig):
     def ready(self):
         from . import signals  # NOQA
         from . import tasks  # NOQA
-
-
-default_app_config = 'pretalx_media_ccc_de.PluginApp'
