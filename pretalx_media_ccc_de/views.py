@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import FormView
-
 from pretalx.common.mixins.views import PermissionRequired
 from pretalx.submission.models import Submission
 
@@ -11,8 +10,8 @@ from .recording import MediaCCCDe
 
 class MediaCCCDeSettings(PermissionRequired, FormView):
     form_class = MediaCCCDeSettingsForm
-    permission_required = 'orga.change_settings'
-    template_name = 'pretalx_media_ccc_de/settings.html'
+    permission_required = "orga.change_settings"
+    template_name = "pretalx_media_ccc_de/settings.html"
 
     def get_success_url(self):
         return self.request.path
@@ -22,20 +21,20 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
-        action = request.POST.get('action', 'save')
-        if action == 'regenerate':
+        action = request.POST.get("action", "save")
+        if action == "regenerate":
             messages.success(
-                request, _('Looking for new talks – this may take a while.')
+                request, _("Looking for new talks – this may take a while.")
             )
             MediaCCCDe(request.event).fill_recording_urls()
             return super().post(request, *args, **kwargs)
 
-        if action.startswith('url'):
-            code = action[len('url_'):]
+        if action.startswith("url"):
+            code = action[len("url_") :]
             try:
                 submission = request.event.submissions.get(code=code)
             except Submission.DoesNotExist:
-                messages.error(request, _('Could not find this talk.'))
+                messages.error(request, _("Could not find this talk."))
                 return super().get(request, *args, **kwargs)
 
             form = MediaCCCDeUrlForm(request.POST, submission=submission)
@@ -44,10 +43,10 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
                 return super().get(request, *args, **kwargs)
             else:
                 request.event.settings.set(
-                    f'media_ccc_de_url_{submission.code}',
-                    form.cleaned_data['media_ccc_de_url'],
+                    f"media_ccc_de_url_{submission.code}",
+                    form.cleaned_data["media_ccc_de_url"],
                 )
-                messages.success(request, _('The URL for this talk was overridden.'))
+                messages.success(request, _("The URL for this talk was overridden."))
                 return super().get(request, *args, **kwargs)
 
         return super().post(request, *args, **kwargs)
@@ -57,11 +56,11 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        return {'obj': self.request.event, 'attribute_name': 'settings', **kwargs}
+        return {"obj": self.request.event, "attribute_name": "settings", **kwargs}
 
     def get_context_data(self, *args, **kwargs):
         kwargs = super().get_context_data(**kwargs)
-        kwargs['url_forms'] = [
+        kwargs["url_forms"] = [
             MediaCCCDeUrlForm(submission=submission)
             for submission in self.request.event.talks
         ]

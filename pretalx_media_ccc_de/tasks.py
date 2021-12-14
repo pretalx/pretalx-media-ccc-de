@@ -3,7 +3,6 @@ from contextlib import suppress
 
 import requests
 from django_scopes import scope, scopes_disabled
-
 from pretalx.celery_app import app
 from pretalx.event.models import Event
 from pretalx.submission.models import Submission
@@ -22,7 +21,7 @@ def task_refresh_recording_urls(event_slug):
             event.settings.media_ccc_de_id = event.slug
 
         response = requests.get(
-            f'https://media.ccc.de/public/conferences/{event.settings.media_ccc_de_id}'
+            f"https://media.ccc.de/public/conferences/{event.settings.media_ccc_de_id}"
         )
         if not response.status_code == 200:
             return None
@@ -32,28 +31,28 @@ def task_refresh_recording_urls(event_slug):
 
 
 def apply_api_response(event, response):
-    for talk in response.get('events', []):
-        if talk.get('frontend_link'):
+    for talk in response.get("events", []):
+        if talk.get("frontend_link"):
             submission = None
-            link = talk.get('link')
+            link = talk.get("link")
             if link:
                 with suppress(Submission.DoesNotExist):
                     submission = Submission.objects.get(
                         event=event,
-                        code__iexact=talk['link']
-                        .rstrip('/')
-                        .rsplit('/', maxsplit=1)[-1],
+                        code__iexact=talk["link"]
+                        .rstrip("/")
+                        .rsplit("/", maxsplit=1)[-1],
                     )
             if not submission:
                 with suppress(Submission.DoesNotExist):
                     submission = Submission.objects.get(
-                        event=event, pk__iexact=talk['slug'].split('-')[1]
+                        event=event, pk__iexact=talk["slug"].split("-")[1]
                     )
                 with suppress(Submission.DoesNotExist):
                     submission = Submission.objects.get(
-                        event=event, code__iexact=talk['slug'].split('-')[1]
+                        event=event, code__iexact=talk["slug"].split("-")[1]
                     )
             if submission:
-                key = f'media_ccc_de_url_{submission.code}'
+                key = f"media_ccc_de_url_{submission.code}"
                 if not event.settings.get(key):
-                    event.settings.set(key, talk['frontend_link'])
+                    event.settings.set(key, talk["frontend_link"])
