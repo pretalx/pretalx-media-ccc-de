@@ -24,7 +24,7 @@ cmdclass = {"build": CustomBuild}
 
 setup(
     name="pretalx-media-ccc-de",
-    version="0.3.0",
+    version="0.3.1",
     description="Pull recordings from media.ccc.de and embed them in talk pages",
     long_description=long_description,
     url="https://github.com/pretalx/pretalx-media-ccc-de.git",

@@ -13,7 +13,7 @@ class PluginApp(AppConfig):
             "Pull recordings from media.ccc.de and embed them in talk pages"
         )
         visible = True
-        version = "0.2.0"
+        version = "0.3.1"
 
     def ready(self):
         from . import signals  # NOQA
