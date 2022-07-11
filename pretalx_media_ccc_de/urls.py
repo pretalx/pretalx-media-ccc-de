@@ -5,7 +5,7 @@ from .views import MediaCCCDeSettings
 
 urlpatterns = [
     re_path(
-        fr"^orga/event/(?P<event>[{SLUG_CHARS}]+)/settings/p/media.ccc.de/$",
+        rf"^orga/event/(?P<event>[{SLUG_CHARS}]+)/settings/p/media.ccc.de/$",
         MediaCCCDeSettings.as_view(),
         name="settings",
     )
