@@ -4,7 +4,6 @@ from hierarkey.forms import HierarkeyForm
 
 
 class MediaCCCDeSettingsForm(HierarkeyForm):
-
     media_ccc_de_id = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
@@ -21,7 +20,6 @@ class MediaCCCDeSettingsForm(HierarkeyForm):
 
 
 class MediaCCCDeUrlForm(forms.Form):
-
     media_ccc_de_url = forms.URLField(required=False)
 
     def __init__(self, *args, **kwargs):
