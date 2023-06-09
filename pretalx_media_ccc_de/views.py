@@ -61,7 +61,9 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
     def get_context_data(self, *args, **kwargs):
         kwargs = super().get_context_data(**kwargs)
         kwargs["url_forms"] = [
-            MediaCCCDeUrlForm(submission=submission)
-            for submission in self.request.event.talks
+            MediaCCCDeUrlForm(submission=slot.submission)
+            for slot in self.request.event.current_schedule.talks.all()
+            .filter(is_visible=True)
+            .order_by("start")
         ]
         return kwargs
