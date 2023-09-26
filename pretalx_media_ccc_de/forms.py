@@ -2,6 +2,8 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from hierarkey.forms import HierarkeyForm
 
+from .models import MediaCccDeLink
+
 
 class MediaCCCDeSettingsForm(HierarkeyForm):
     media_ccc_de_id = forms.CharField(required=False)
@@ -31,21 +33,31 @@ class MediaCCCDeUrlForm(forms.Form):
             .filter(is_visible=True, submission__isnull=False)
             .order_by("start")
         )
+        video_data = {
+            v.submission.code: v.url
+            for v in MediaCccDeLink.objects.filter(submission__event=event)
+        }
         s = _("Go to video.")
         p = _("Go to talk page.")
         for talk in self.talks:
-            initial = event.settings.get(f"media_ccc_de_url_{talk.submission.code}")
+            link = video_data.get(talk.submission.code)
             help_text = f'<a href="{talk.submission.urls.public.full()}">{p}</a>'
-            if initial:
-                help_text += f' | <a href="{initial}">{s}</a>'
-            self.fields[f"media_ccc_de_url_{talk.submission.code}"] = forms.URLField(
+            if link:
+                help_text += f' | <a href="{link}">{s}</a>'
+            self.fields[f"video_id_{talk.submission.code}"] = forms.URLField(
                 required=False,
                 label=talk.submission.title,
                 widget=forms.URLInput(attrs={"placeholder": ""}),
-                initial=initial,
+                initial=link,
                 help_text=help_text,
             )
 
     def save(self):
-        for key, value in self.cleaned_data.items():
-            self.event.settings.set(key, value)
+        for talk in self.talks:
+            url = self.cleaned_data.get(f"video_id_{talk.submission.code}")
+            if url:
+                MediaCccDeLink.objects.update_or_create(
+                    submission=talk.submission, defaults={"url": url}
+                )
+            else:
+                MediaCccDeLink.objects.filter(submission=talk.submission).delete()

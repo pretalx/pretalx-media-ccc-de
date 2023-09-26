@@ -7,6 +7,8 @@ from pretalx.celery_app import app
 from pretalx.event.models import Event
 from pretalx.submission.models import Submission
 
+from .models import MediaCccDeLink
+
 
 @app.task()
 def task_refresh_recording_urls(event_slug):
@@ -27,32 +29,37 @@ def task_refresh_recording_urls(event_slug):
             return None
 
         structure = json.loads(response.content.decode())
-        apply_api_response(event=event, response=structure)
 
+        for api_data in structure.get("events", []):
+            if not api_data.get("frontend_link"):
+                continue
 
-def apply_api_response(event, response):
-    for talk in response.get("events", []):
-        if talk.get("frontend_link"):
-            submission = None
-            link = talk.get("link")
-            if link:
-                with suppress(Submission.DoesNotExist):
-                    submission = Submission.objects.get(
-                        event=event,
-                        code__iexact=talk["link"]
-                        .rstrip("/")
-                        .rsplit("/", maxsplit=1)[-1],
-                    )
-            if not submission:
-                with suppress(Submission.DoesNotExist):
-                    submission = Submission.objects.get(
-                        event=event, pk__iexact=talk["slug"].split("-")[1]
-                    )
-                with suppress(Submission.DoesNotExist):
-                    submission = Submission.objects.get(
-                        event=event, code__iexact=talk["slug"].split("-")[1]
-                    )
+            submission = find_submission(event, api_data)
             if submission:
-                key = f"media_ccc_de_url_{submission.code}"
-                if not event.settings.get(key):
-                    event.settings.set(key, talk["frontend_link"])
+                MediaCccDeLink.objects.update_or_create(
+                    submission=submission,
+                    defaults={
+                        "url": api_data["frontend_link"],
+                        "release_date": api_data["release_date"],
+                        "duration_seconds": api_data["duration"],
+                        "thumbnail_url": api_data["poster_url"],
+                    },
+                )
+
+
+def find_submission(event, api_data):
+    link = api_data.get("link")
+    if link:
+        with suppress(Submission.DoesNotExist):
+            return Submission.objects.get(
+                event=event,
+                code__iexact=link.rstrip("/").rsplit("/", maxsplit=1)[-1],
+            )
+    with suppress(Submission.DoesNotExist):
+        return Submission.objects.get(
+            event=event, pk__iexact=api_data["slug"].split("-")[1]
+        )
+    with suppress(Submission.DoesNotExist):
+        return Submission.objects.get(
+            event=event, code__iexact=api_data["slug"].split("-")[1]
+        )
