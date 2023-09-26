@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-17 23:58+0000\n"
+"POT-Creation-Date: 2023-09-25 12:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Pull recordings from media.ccc.de and embed them in talk pages"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:17
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:16
 #, python-brace-format
 msgid ""
 "The slug or ID used for your event in the media.ccc.de API – defaults to "
