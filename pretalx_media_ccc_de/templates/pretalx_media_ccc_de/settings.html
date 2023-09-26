@@ -29,18 +29,17 @@
         </div>
     </form>
 
-    <h3>{% trans "Change URLs" %}</h3>
+    {% if url_form %}
+        <h3>{% trans "Change URLs" %}</h3>
 
-    {% for sform in url_forms %}
         <form method="post">
             {% csrf_token %}
-            <button name="action" value="url_{{ sform.submission.code }}" type="submit" class="btn btn-info float-right">
-                <i class="fa fa-check"></i>
+            {% bootstrap_form url_form layout='event' %}
+
+            <button type="submit" name="action" value="urls" class="btn btn-success btn-lg float-right">
+                {% trans "Save" %}
             </button>
-            <div class="mr-5">
-                {% bootstrap_form sform layout='event' %}
-            </div>
         </form>
-    {% endfor %}
+    {% endif %}
 
 {% endblock %}

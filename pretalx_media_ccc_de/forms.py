@@ -20,14 +20,30 @@ class MediaCCCDeSettingsForm(HierarkeyForm):
 
 
 class MediaCCCDeUrlForm(forms.Form):
-    media_ccc_de_url = forms.URLField(required=False)
+    def __init__(self, *args, event=None, **kwargs):
+        if not event or not event.current_schedule:
+            return super().__init__(*args, **kwargs)
+        self.event = event
 
-    def __init__(self, *args, **kwargs):
-        self.submission = kwargs.pop("submission")
-        initial = kwargs.get("initial", dict())
-        initial["media_ccc_de_url"] = self.submission.event.settings.get(
-            f"media_ccc_de_url_{self.submission.code}"
+        self.talks = (
+            event.current_schedule.talks.all()
+            .filter(is_visible=True, submission__isnull=False)
+            .order_by("start")
         )
+        initial = kwargs.get("initial", dict())
+        for talk in self.talks:
+            initial[f"media_ccc_de_url_{talk.submission.code}"] = event.settings.get(
+                f"media_ccc_de_url_{talk.submission.code}"
+            )
         kwargs["initial"] = initial
         super().__init__(*args, **kwargs)
-        self.fields["media_ccc_de_url"].label = self.submission.title
+        for talk in self.talks:
+            self.fields[f"media_ccc_de_url_{talk.submission.code}"] = forms.URLField(
+                required=False,
+                label=talk.submission.title,
+                widget=forms.URLInput(attrs={"placeholder": ""}),
+            )
+
+    def save(self):
+        for key, value in self.cleaned_data.items():
+            self.event.settings.set(key, value)

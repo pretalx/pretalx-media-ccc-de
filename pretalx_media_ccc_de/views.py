@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import FormView
 from pretalx.common.mixins.views import PermissionRequired
-from pretalx.submission.models import Submission
 
 from .forms import MediaCCCDeSettingsForm, MediaCCCDeUrlForm
 from .recording import MediaCCCDe
@@ -29,24 +28,16 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
             MediaCCCDe(request.event).fill_recording_urls()
             return super().post(request, *args, **kwargs)
 
-        if action.startswith("url"):
-            code = action[len("url_") :]
-            try:
-                submission = request.event.submissions.get(code=code)
-            except Submission.DoesNotExist:
-                messages.error(request, _("Could not find this talk."))
-                return super().get(request, *args, **kwargs)
-
-            form = MediaCCCDeUrlForm(request.POST, submission=submission)
+        if action == "urls":
+            form = MediaCCCDeUrlForm(request.POST, event=self.request.event)
             if not form.is_valid():
                 messages.error(request, form.errors)
                 return super().get(request, *args, **kwargs)
             else:
-                request.event.settings.set(
-                    f"media_ccc_de_url_{submission.code}",
-                    form.cleaned_data["media_ccc_de_url"],
+                form.save()
+                messages.success(
+                    request, _("The URLs for this event have been changed.")
                 )
-                messages.success(request, _("The URL for this talk was overridden."))
                 return super().get(request, *args, **kwargs)
 
         return super().post(request, *args, **kwargs)
@@ -61,12 +52,7 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
     def get_context_data(self, *args, **kwargs):
         kwargs = super().get_context_data(**kwargs)
         if self.request.event.current_schedule:
-            kwargs["url_forms"] = [
-                MediaCCCDeUrlForm(submission=slot.submission)
-                for slot in self.request.event.current_schedule.talks.all()
-                .filter(is_visible=True, submission__isnull=False)
-                .order_by("start")
-            ]
+            kwargs["url_form"] = MediaCCCDeUrlForm(event=self.request.event)
         else:
             kwargs["url_forms"] = []
         return kwargs
