@@ -1,6 +1,8 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy
 
+from pretalx_media_ccc_de import __version__
+
 
 class PluginApp(AppConfig):
     name = "pretalx_media_ccc_de"
@@ -13,7 +15,7 @@ class PluginApp(AppConfig):
             "Pull recordings from media.ccc.de and embed them in talk pages"
         )
         visible = True
-        version = "1.2.0"
+        version = __version__
         category = "RECORDING"
 
     def ready(self):
