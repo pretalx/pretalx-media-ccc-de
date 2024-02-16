@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-25 12:10+0000\n"
+"POT-Creation-Date: 2023-11-03 08:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:10
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:12
 msgid "media.ccc.de recordings"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:13
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:15
 msgid "Pull recordings from media.ccc.de and embed them in talk pages"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:16
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:18
 #, python-brace-format
 msgid ""
 "The slug or ID used for your event in the media.ccc.de API – defaults to "
@@ -35,11 +35,20 @@ msgid ""
 "href=\"{url}\">{url}</a>"
 msgstr ""
 
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:40
+msgid "Go to video."
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:41
+msgid "Go to talk page."
+msgstr ""
+
 #: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:7
 msgid "Set up media.ccc.de sync"
 msgstr ""
 
 #: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:19
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:40
 msgid "Save"
 msgstr ""
 
@@ -47,18 +56,14 @@ msgstr ""
 msgid "Check for new talks"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:32
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:33
 msgid "Change URLs"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:27
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:26
 msgid "Looking for new talks – this may take a while."
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:37
-msgid "Could not find this talk."
-msgstr ""
-
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:49
-msgid "The URL for this talk was overridden."
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:39
+msgid "The URLs for this event have been changed."
 msgstr ""
