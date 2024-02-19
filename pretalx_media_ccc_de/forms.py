@@ -23,10 +23,10 @@ class MediaCCCDeSettingsForm(HierarkeyForm):
 
 class MediaCCCDeUrlForm(forms.Form):
     def __init__(self, *args, event=None, **kwargs):
-        if not event or not event.current_schedule:
-            return super().__init__(*args, **kwargs)
         self.event = event
         super().__init__(*args, **kwargs)
+        if not event or not event.current_schedule:
+            return
 
         self.talks = (
             event.current_schedule.talks.all()

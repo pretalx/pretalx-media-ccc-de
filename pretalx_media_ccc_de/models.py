@@ -20,9 +20,9 @@ class MediaCccDeLink(models.Model):
         return {
             "submission": self.submission.code,
             "url": self.url,
-            "release_date": self.release_date.isoformat()
-            if self.release_date
-            else None,
+            "release_date": (
+                self.release_date.isoformat() if self.release_date else None
+            ),
             "duration_seconds": self.duration_seconds,
             "thumbnail_url": self.thumbnail_url,
         }
