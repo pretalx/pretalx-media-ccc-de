@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-19 02:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:12
+msgid "media.ccc.de recordings"
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:15
+msgid "Pull recordings from media.ccc.de and embed them in talk pages"
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:18
+#, python-brace-format
+msgid ""
+"The slug or ID used for your event in the media.ccc.de API – defaults to "
+"your event slug. Your event's data has to be available at <a "
+"href=\"{url}\">{url}</a>"
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:40
+msgid "Go to video."
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:41
+msgid "Go to talk page."
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:7
+msgid "Set up media.ccc.de sync"
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:19
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:40
+msgid "Save"
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:26
+msgid "Check for new talks"
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:33
+msgid "Change URLs"
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:26
+msgid "Looking for new talks – this may take a while."
+msgstr ""
+
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:39
+msgid "The URLs for this event have been changed."
+msgstr ""
