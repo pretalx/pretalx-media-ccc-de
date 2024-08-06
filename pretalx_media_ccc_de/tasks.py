@@ -10,7 +10,7 @@ from pretalx.submission.models import Submission
 from .models import MediaCccDeLink
 
 
-@app.task()
+@app.task(name="pretalx_media_ccc_de.refresh_recording_urls")
 def task_refresh_recording_urls(event_slug):
     try:
         with scopes_disabled():
