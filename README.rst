@@ -1,7 +1,9 @@
 media.ccc.de recordings
 ==========================
 
-This is a plugin for `pretalx`_. 
+This is a plugin for `pretalx`_ that provides an integration with media.ccc.de, allowing you to embed recordings on talk pages.
+
+.. image:: https://github.com/pretalx/pretalx-media-ccc-de/blob/main/assets/screenshot.png?raw=true
 
 Development setup
 -----------------
