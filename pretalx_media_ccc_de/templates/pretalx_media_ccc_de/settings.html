@@ -1,5 +1,4 @@
 {% extends "orga/base.html" %}
-{% load bootstrap4 %}
 {% load i18n %}
 
 {% block content %}
@@ -7,7 +6,8 @@
     <h2>{% trans "Set up media.ccc.de sync" %}</h2>
     <form method="post">
         {% csrf_token %}
-        {% bootstrap_form form layout='event' %}
+        {% include "common/forms/errors.html" with errors=form.non_field_errors %}
+        {{ form }}
         <div class="submit-group panel">
             <span></span>
             <span class="d-flex flex-row-reverse">
@@ -34,7 +34,8 @@
 
         <form method="post">
             {% csrf_token %}
-            {% bootstrap_form url_form layout='event' %}
+            {% include "common/forms/errors.html" with errors=url_form.non_field_errors %}
+            {{ url_form }}
 
             <button type="submit" name="action" value="urls" class="btn btn-success btn-lg float-right">
                 {% trans "Save" %}
