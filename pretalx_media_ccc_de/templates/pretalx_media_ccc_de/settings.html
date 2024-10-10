@@ -6,7 +6,6 @@
     <h2>{% trans "Set up media.ccc.de sync" %}</h2>
     <form method="post">
         {% csrf_token %}
-        {% include "common/forms/errors.html" with errors=form.non_field_errors %}
         {{ form }}
         <div class="submit-group panel">
             <span></span>
@@ -32,15 +31,7 @@
     {% if url_form %}
         <h3>{% trans "Change URLs" %}</h3>
 
-        <form method="post">
-            {% csrf_token %}
-            {% include "common/forms/errors.html" with errors=url_form.non_field_errors %}
-            {{ url_form }}
-
-            <button type="submit" name="action" value="urls" class="btn btn-success btn-lg float-right">
-                {% trans "Save" %}
-            </button>
-        </form>
+        {% include "orga/includes/base_form.html" with form=url_form %}
     {% endif %}
 
 {% endblock %}
