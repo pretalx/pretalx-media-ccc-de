@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-03 08:44+0000\n"
+"POT-Creation-Date: 2024-10-12 00:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,8 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:12
 msgid "media.ccc.de recordings"
@@ -43,20 +42,19 @@ msgstr ""
 msgid "Go to talk page."
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:7
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:6
 msgid "Set up media.ccc.de sync"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:19
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:40
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:18
 msgid "Save"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:26
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:25
 msgid "Check for new talks"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:33
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:32
 msgid "Change URLs"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-10 00:01+0000\n"
+"POT-Creation-Date: 2024-10-12 00:15+0000\n"
 "PO-Revision-Date: 2018-11-28 00:47+0100\n"
 "Last-Translator: Tobias Kunze <r@rixx.de>\n"
 "Language-Team: \n"
@@ -38,8 +38,8 @@ msgid ""
 "href=\"{url}\">{url}</a>"
 msgstr ""
 "Die Kurzform oder ID, die für die Veranstaltung in der media.ccc.de-API "
-"genutzt wird – zum Beispiel die Kurzform der Veranstaltung. Die Daten müssen "
-"unter <a href=\"{url}\">{url}</a> zu finden sein"
+"genutzt wird – zum Beispiel die Kurzform der Veranstaltung. Die Daten müssen"
+" unter <a href=\"{url}\">{url}</a> zu finden sein"
 
 #: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:40
 msgid "Go to video."
@@ -53,16 +53,15 @@ msgstr ""
 msgid "Set up media.ccc.de sync"
 msgstr "media.ccc.de-Synchronisierung"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:19
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:41
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:18
 msgid "Save"
 msgstr "Speichern"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:26
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:25
 msgid "Check for new talks"
 msgstr "Nach Aufzeichnungen suchen"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:33
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:32
 msgid "Change URLs"
 msgstr ""
 

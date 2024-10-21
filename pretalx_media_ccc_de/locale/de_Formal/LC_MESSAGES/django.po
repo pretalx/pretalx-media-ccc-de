@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-03 08:44+0000\n"
+"POT-Creation-Date: 2024-10-12 00:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,20 +41,19 @@ msgstr ""
 msgid "Go to talk page."
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:7
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:6
 msgid "Set up media.ccc.de sync"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:19
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:40
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:18
 msgid "Save"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:26
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:25
 msgid "Check for new talks"
 msgstr ""
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:33
+#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:32
 msgid "Change URLs"
 msgstr ""
 
