@@ -1,5 +1,6 @@
 import json
 from contextlib import suppress
+from functools import cached_property
 
 import requests
 from django_scopes import scope, scopes_disabled
@@ -29,12 +30,13 @@ def task_refresh_recording_urls(event_slug):
             return None
 
         structure = json.loads(response.content.decode())
+        submission_finder = SubmissionFinder(event)
 
         for api_data in structure.get("events", []):
             if not api_data.get("frontend_link"):
                 continue
 
-            submission = find_submission(event, api_data)
+            submission = submission_finder.find(api_data)
             if submission:
                 MediaCccDeLink.objects.update_or_create(
                     submission=submission,
@@ -47,19 +49,35 @@ def task_refresh_recording_urls(event_slug):
                 )
 
 
-def find_submission(event, api_data):
-    link = api_data.get("link")
-    if link:
+class SubmissionFinder:
+
+    def __init__(self, event):
+        self.event = event
+
+    def find(self, api_data):
+        guid = api_data.get("guid")
+        if guid and guid in self.submissions_by_uuid:
+            return self.submissions_by_uuid[guid]
+
+        link = api_data.get("link")
+        if link:
+            with suppress(Submission.DoesNotExist):
+                return Submission.objects.get(
+                    event=self.event,
+                    code__iexact=link.rstrip("/").rsplit("/", maxsplit=1)[-1],
+                )
         with suppress(Submission.DoesNotExist):
             return Submission.objects.get(
-                event=event,
-                code__iexact=link.rstrip("/").rsplit("/", maxsplit=1)[-1],
+                event=self.event, pk__iexact=api_data["slug"].split("-")[1]
             )
-    with suppress(Submission.DoesNotExist):
-        return Submission.objects.get(
-            event=event, pk__iexact=api_data["slug"].split("-")[1]
-        )
-    with suppress(Submission.DoesNotExist):
-        return Submission.objects.get(
-            event=event, code__iexact=api_data["slug"].split("-")[1]
-        )
+        with suppress(Submission.DoesNotExist):
+            return Submission.objects.get(
+                event=self.event, code__iexact=api_data["slug"].split("-")[1]
+            )
+
+    @cached_property
+    def submissions_by_uuid(self):
+        # UUIDs are a property of Slots, but are (currently) only generated from information about the
+        # respective Submission (and pretalx instance)
+        slots = self.event.current_schedule.scheduled_talks
+        return {str(slot.uuid): slot.submission for slot in slots}
