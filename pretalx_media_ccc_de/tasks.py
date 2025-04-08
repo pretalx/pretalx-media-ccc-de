@@ -55,12 +55,10 @@ class SubmissionFinder:
         self.event = event
 
     def find(self, api_data):
-        guid = api_data.get("guid")
-        if guid and guid in self.submissions_by_uuid:
+        if (guid := api_data.get("guid")) and guid in self.submissions_by_uuid:
             return self.submissions_by_uuid[guid]
 
-        link = api_data.get("link")
-        if link:
+        if link := api_data.get("link"):
             with suppress(Submission.DoesNotExist):
                 return Submission.objects.get(
                     event=self.event,
