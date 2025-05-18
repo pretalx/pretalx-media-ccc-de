@@ -9,7 +9,7 @@ from .recording import MediaCCCDe
 
 class MediaCCCDeSettings(PermissionRequired, FormView):
     form_class = MediaCCCDeSettingsForm
-    permission_required = "orga.change_settings"
+    permission_required = "event.update_event"
     template_name = "pretalx_media_ccc_de/settings.html"
 
     def get_success_url(self):
