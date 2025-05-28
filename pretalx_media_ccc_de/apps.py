@@ -20,4 +20,3 @@ class PluginApp(AppConfig):
 
     def ready(self):
         from . import signals  # NOQA
-        from . import tasks  # NOQA
