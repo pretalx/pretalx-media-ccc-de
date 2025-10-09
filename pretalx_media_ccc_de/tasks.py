@@ -29,7 +29,7 @@ def task_refresh_recording_urls(event_slug):
         if not response.status_code == 200:
             return None
 
-        structure = json.loads(response.content.decode())
+        structure = json.loads(response.text)
         submission_finder = SubmissionFinder(event)
 
         for api_data in structure.get("events", []):
