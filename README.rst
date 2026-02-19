@@ -23,8 +23,30 @@ Development setup
 5. Restart your local pretalx server. This plugin should show up in the plugin list shown on startup in the console.
    You can now use the plugin from this repository for your events by enabling it in the 'plugins' tab in the settings.
 
-6. Restart your local pretalx server. You can now use the plugin from this repository for your events by enabling it in
-   the 'plugins' tab in the settings.
+This project uses `just`_ as a task runner and `uv`_ for dependency management.
+
+Code style
+~~~~~~~~~~
+
+To check your plugin for code style violations, run::
+
+    just fmt-check
+
+To auto-fix formatting issues, run::
+
+    just fmt
+
+Testing
+~~~~~~~
+
+To run the test suite, run::
+
+    just test
+
+This will automatically install pretalx if it's not already present. If you want
+to test against a local pretalx checkout instead, run::
+
+    just install-pretalx-local /path/to/pretalx
 
 
 License

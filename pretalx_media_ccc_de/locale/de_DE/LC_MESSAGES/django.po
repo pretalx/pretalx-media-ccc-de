@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-12 00:15+0000\n"
+"POT-Creation-Date: 2026-02-18 11:37+0000\n"
 "PO-Revision-Date: 2025-04-08 09:37+0200\n"
 "Last-Translator: Tobias Kunze <r@rixx.de>\n"
 "Language-Team: \n"
@@ -17,16 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:12
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:11
 msgid "media.ccc.de recordings"
 msgstr "Aufzeichnungen auf media.ccc.de"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:15
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/apps.py:14
 msgid "Pull recordings from media.ccc.de and embed them in talk pages"
 msgstr ""
 "Aufzeichnungen von media.ccc.de erfassen und auf Vortragsseiten einbetten"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:18
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:18
 #, python-brace-format
 msgid ""
 "The slug or ID used for your event in the media.ccc.de API – defaults to "
@@ -37,35 +37,35 @@ msgstr ""
 "genutzt wird – ist standardmäßig die Kurzform der Veranstaltung. Die Daten "
 "müssen unter <a href=\"{url}\">{url}</a> zu finden sein"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:40
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:40
 msgid "Go to video."
 msgstr "Zum Video"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:41
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/forms.py:41
 msgid "Go to talk page."
 msgstr "Zur Vortragsseite"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:6
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:6
 msgid "Set up media.ccc.de sync"
 msgstr "media.ccc.de-Synchronisierung aufsetzen"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:18
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:18
 msgid "Save"
 msgstr "Speichern"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:25
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:25
 msgid "Check for new talks"
 msgstr "Nach Aufzeichnungen suchen"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:32
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/templates/pretalx_media_ccc_de/settings.html:32
 msgid "Change URLs"
 msgstr "URLs ändern"
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:26
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:27
 msgid "Looking for new talks – this may take a while."
 msgstr ""
 "Auchzeichnungen werden synchronisiert – das kann einen Augenblick dauern."
 
-#: local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:39
+#: src/local/pretalx-media-ccc-de/pretalx_media_ccc_de/views.py:40
 msgid "The URLs for this event have been changed."
 msgstr "Die URLs für diese Veranstaltung wurden geändert."
