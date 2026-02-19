@@ -4,6 +4,7 @@ from functools import cached_property
 
 import requests
 from django_scopes import scope, scopes_disabled
+
 from pretalx.celery_app import app
 from pretalx.event.models import Event
 from pretalx.submission.models import Submission
@@ -26,7 +27,7 @@ def task_refresh_recording_urls(event_slug):
         response = requests.get(
             f"https://media.ccc.de/public/conferences/{event.settings.media_ccc_de_id}"
         )
-        if not response.status_code == 200:
+        if response.status_code != 200:
             return None
 
         structure = json.loads(response.text)
@@ -50,7 +51,6 @@ def task_refresh_recording_urls(event_slug):
 
 
 class SubmissionFinder:
-
     def __init__(self, event):
         self.event = event
 

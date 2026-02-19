@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.timezone import now
 from django_scopes import scope, scopes_disabled
+
 from pretalx.agenda.signals import register_recording_provider
 from pretalx.common.signals import periodic_task
 from pretalx.event.models import Event

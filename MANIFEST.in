@@ -1,7 +1,6 @@
 recursive-include pretalx_media_ccc_de/static *
 recursive-include pretalx_media_ccc_de/templates *
 exclude pretalx_media_ccc_de/locale/django.pot
-recursive-exclude assets *
 recursive-include pretalx_media_ccc_de/locale *
 recursive-include pretalx_media_ccc_de *.py
-include Makefile
+include justfile

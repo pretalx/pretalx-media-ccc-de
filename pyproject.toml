@@ -12,7 +12,17 @@ maintainers = [
   {name = "Tobias Kunze", email = "r@rixx.de"},
 ]
 
+requires-python = ">=3.11"
 dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "djhtml",
+  "pytest",
+  "pytest-cov",
+  "pytest-django",
+  "ruff",
+]
 
 [project.urls]
 homepage = "https://github.com/pretalx/pretalx-media-ccc-de"
@@ -23,7 +33,7 @@ pretalx_media_ccc_de = "pretalx_media_ccc_de:PretalxPluginMeta"
 
 [build-system]
 build-backend = "setuptools.build_meta"
-requires = ["setuptools", "wheel"]
+requires = ["setuptools"]
 
 [tool.setuptools]
 include-package-data = true
@@ -35,6 +45,66 @@ version = {attr = "pretalx_media_ccc_de.__version__"}
 include = ["pretalx*"]
 
 [tool.check-manifest]
-ignore = [
-  ".*",
+ignore = [".*", "tests/*", "justfile"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "pretalx.common.settings.test_settings"
+addopts = "--cov=pretalx_media_ccc_de --cov-report=term-missing:skip-covered --cov-config=pyproject.toml"
+
+[tool.coverage.run]
+branch = true
+relative_files = true
+source = ["pretalx_media_ccc_de"]
+omit = ["*/migrations/*", "*/urls.py", "*/tests/*"]
+
+[tool.coverage.report]
+exclude_also = [
+  "def __repr__",
+  "def __str__",
+  "if settings.DEBUG",
+  "NOQA",
+  "noqa",
+  "NotImplementedError",
 ]
+
+[tool.ruff.lint]
+extend-select = [
+  "A",      # flake8-builtins
+  "B",      # flake8-bugbear
+  "C4",     # Use comprehensions rather than generators
+  "E",      # pycodestyle errors
+  "ERA",    # Drop commented-out code
+  "F",      # pyflakes
+  "FURB",   # Refactoring
+  "G",      # logging: formatting
+  "INT",    # gettext
+  "LOG",    # logging: logger
+  "N",      # PEP8-naming
+  "PERF",   # Performance issues
+  "PGH",    # no blanket noqa
+  "PIE",    # Mixed checks
+  "PL",     # pylint
+  "PLC0415",# pylint: top-level imports
+  "PT",     # pytest
+  "PTH",    # use pathlib
+  "RSE",    # raising exceptions
+  "RUF",    # Ruff
+  "SIM",    # Possible simplifications
+  "T10",    # Catch debugger statements
+  "T20",    # Catch print statements
+  "TID",    # Tidy imports
+  "UP",     # pyupgrade
+  "W",      # pycodestyle warnings
+]
+ignore = [
+  "E501",   # Line too long
+  "PLR",    # Refactoring: Too many branches, arguments, statements, etc
+  "RUF001", # ambiguous characters
+  "RUF002", # ambiguous characters
+  "RUF003", # ambiguous characters
+  "RUF012", # Mutable default in class attribute is just how django rolls
+  "RUF100", # Unused noqa; problematic when run in isolation
+]
+
+[tool.ruff.lint.flake8-pytest-style]
+parametrize-values-type = "tuple"
