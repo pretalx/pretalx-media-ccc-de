@@ -34,12 +34,9 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
             if not form.is_valid():
                 messages.error(request, form.errors)
                 return super().get(request, *args, **kwargs)
-            else:
-                form.save()
-                messages.success(
-                    request, _("The URLs for this event have been changed.")
-                )
-                return super().get(request, *args, **kwargs)
+            form.save()
+            messages.success(request, _("The URLs for this event have been changed."))
+            return super().get(request, *args, **kwargs)
 
         return super().post(request, *args, **kwargs)
 

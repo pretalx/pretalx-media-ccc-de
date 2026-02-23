@@ -12,6 +12,9 @@ class MediaCccDeLink(models.Model):
     duration_seconds = models.IntegerField(null=True, blank=True)
     thumbnail_url = models.URLField(null=True, blank=True)
 
+    def __str__(self):
+        return f"MediaCccDeLink: {self.submission.code}"
+
     @property
     def iframe(self):
         return f'<div class="embed-responsive embed-responsive-16by9"><iframe src="{self.url}/oembed" frameborder="0" allowfullscreen></iframe></div>'

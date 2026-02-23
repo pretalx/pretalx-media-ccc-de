@@ -7,9 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
     initial = True
 
-    dependencies = [
-        ("submission", "0073_track_position"),
-    ]
+    dependencies = [("submission", "0073_track_position")]
 
     operations = [
         migrations.CreateModel(
@@ -34,5 +32,5 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-        ),
+        )
     ]

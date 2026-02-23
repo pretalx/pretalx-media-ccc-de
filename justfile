@@ -19,7 +19,7 @@ check *args=".":
 # Run all formatters and linters
 [group('linting')]
 [parallel]
-fmt: format check djhtml
+fmt: format (check "--fix") djhtml
 
 # Check Django templates with djhtml (check only)
 [group('linting')]

@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy
+
 from pretalx_media_ccc_de import __version__
 
 
@@ -17,7 +18,7 @@ class PluginApp(AppConfig):
         version = __version__
         category = "RECORDING"
         settings_links = [
-            (gettext_lazy("Settings"), "plugins:pretalx_media_ccc_de:settings", {}),
+            (gettext_lazy("Settings"), "plugins:pretalx_media_ccc_de:settings", {})
         ]
 
     def ready(self):

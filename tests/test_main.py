@@ -16,8 +16,7 @@ SETTINGS_URL_NAME = "plugins:pretalx_media_ccc_de:settings"
 @pytest.mark.django_db
 def test_orga_can_access_settings(orga_client, event):
     response = orga_client.get(
-        reverse(SETTINGS_URL_NAME, kwargs={"event": event.slug}),
-        follow=True,
+        reverse(SETTINGS_URL_NAME, kwargs={"event": event.slug}), follow=True
     )
     assert response.status_code == 200
 
@@ -25,7 +24,7 @@ def test_orga_can_access_settings(orga_client, event):
 @pytest.mark.django_db
 def test_reviewer_cannot_access_settings(review_client, event):
     response = review_client.get(
-        reverse(SETTINGS_URL_NAME, kwargs={"event": event.slug}),
+        reverse(SETTINGS_URL_NAME, kwargs={"event": event.slug})
     )
     assert response.status_code == 404
 
@@ -34,9 +33,7 @@ def test_reviewer_cannot_access_settings(review_client, event):
 def test_orga_can_save_settings(orga_client, event):
     url = reverse(SETTINGS_URL_NAME, kwargs={"event": event.slug})
     response = orga_client.post(
-        url,
-        {"media_ccc_de_id": "my-conference", "action": "save"},
-        follow=True,
+        url, {"media_ccc_de_id": "my-conference", "action": "save"}, follow=True
     )
     assert response.status_code == 200
     event.settings.flush()
@@ -48,9 +45,7 @@ def test_orga_can_save_settings(orga_client, event):
 def test_orga_can_regenerate(mock_task, orga_client, event):
     url = reverse(SETTINGS_URL_NAME, kwargs={"event": event.slug})
     response = orga_client.post(
-        url,
-        {"media_ccc_de_id": event.slug, "action": "regenerate"},
-        follow=True,
+        url, {"media_ccc_de_id": event.slug, "action": "regenerate"}, follow=True
     )
     assert response.status_code == 200
     mock_task.apply_async.assert_called_once()
@@ -84,9 +79,7 @@ def test_orga_can_clear_url(orga_client, event, schedule_with_talk, submission):
         )
     url = reverse(SETTINGS_URL_NAME, kwargs={"event": event.slug})
     response = orga_client.post(
-        url,
-        {"action": "urls", f"video_id_{submission.code}": ""},
-        follow=True,
+        url, {"action": "urls", f"video_id_{submission.code}": ""}, follow=True
     )
     assert response.status_code == 200
     with scopes_disabled():

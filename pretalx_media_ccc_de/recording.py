@@ -12,7 +12,4 @@ class MediaCCCDe(BaseRecordingProvider):
     def get_recording(self, submission):
         data = getattr(submission, "media_ccc_de_link", None)
         if data:
-            return {
-                "iframe": data.iframe,
-                "csp_header": "https://media.ccc.de",
-            }
+            return {"iframe": data.iframe, "csp_header": "https://media.ccc.de"}

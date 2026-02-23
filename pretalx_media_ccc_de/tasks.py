@@ -25,10 +25,11 @@ def task_refresh_recording_urls(event_slug):
             event.settings.media_ccc_de_id = event.slug
 
         response = requests.get(
-            f"https://media.ccc.de/public/conferences/{event.settings.media_ccc_de_id}"
+            f"https://media.ccc.de/public/conferences/{event.settings.media_ccc_de_id}",
+            timeout=30,
         )
         if response.status_code != 200:
-            return None
+            return
 
         structure = json.loads(response.text)
         submission_finder = SubmissionFinder(event)
