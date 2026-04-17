@@ -10,7 +10,7 @@
 | pretalx\_media\_ccc\_de/models.py       |       12 |        0 |        0 |        0 |    100% |           |
 | pretalx\_media\_ccc\_de/recording.py    |        9 |        0 |        2 |        0 |    100% |           |
 | pretalx\_media\_ccc\_de/signals.py      |       30 |       10 |        8 |        0 |     58% |     23-37 |
-| pretalx\_media\_ccc\_de/tasks.py        |       47 |        0 |       14 |        1 |     98% |    42->37 |
+| pretalx\_media\_ccc\_de/tasks.py        |       47 |        0 |       14 |        1 |     98% |   42-\>37 |
 | pretalx\_media\_ccc\_de/views.py        |       41 |        2 |        8 |        1 |     94% |     35-36 |
 | **TOTAL**                               |  **190** |   **13** |   **44** |    **3** | **91%** |           |
 
