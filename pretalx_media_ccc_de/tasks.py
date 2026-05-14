@@ -1,8 +1,7 @@
-import json
 from contextlib import suppress
 from functools import cached_property
 
-import requests
+import urllib3
 from django_scopes import scope, scopes_disabled
 
 from pretalx.celery_app import app
@@ -24,14 +23,15 @@ def task_refresh_recording_urls(event_slug):
         if not event.settings.media_ccc_de_id:
             event.settings.media_ccc_de_id = event.slug
 
-        response = requests.get(
+        response = urllib3.request(
+            "GET",
             f"https://media.ccc.de/public/conferences/{event.settings.media_ccc_de_id}",
             timeout=30,
         )
-        if response.status_code != 200:
+        if response.status != 200:
             return
 
-        structure = json.loads(response.text)
+        structure = response.json()
         submission_finder = SubmissionFinder(event)
 
         for api_data in structure.get("events", []):

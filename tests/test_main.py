@@ -1,4 +1,3 @@
-import json
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -155,27 +154,25 @@ def test_recording_provider_get_recording_without_link(event, submission):
 
 
 @pytest.mark.django_db
-@patch("pretalx_media_ccc_de.tasks.requests.get")
+@patch("pretalx_media_ccc_de.tasks.urllib3.request")
 def test_task_refresh_creates_links(mock_get, event, submission, schedule_with_talk):
     event.settings.media_ccc_de_id = "testconf"
     with scopes_disabled():
         slot = schedule_with_talk.talks.first()
     mock_response = MagicMock()
-    mock_response.status_code = 200
-    mock_response.text = json.dumps(
-        {
-            "events": [
-                {
-                    "guid": str(slot.uuid),
-                    "frontend_link": "https://media.ccc.de/v/test-talk",
-                    "release_date": "2024-01-01T00:00:00Z",
-                    "duration": 1800,
-                    "poster_url": "https://media.ccc.de/thumb.jpg",
-                    "slug": "test-123",
-                }
-            ]
-        }
-    )
+    mock_response.status = 200
+    mock_response.json.return_value = {
+        "events": [
+            {
+                "guid": str(slot.uuid),
+                "frontend_link": "https://media.ccc.de/v/test-talk",
+                "release_date": "2024-01-01T00:00:00Z",
+                "duration": 1800,
+                "poster_url": "https://media.ccc.de/thumb.jpg",
+                "slug": "test-123",
+            }
+        ]
+    }
     mock_get.return_value = mock_response
     task_refresh_recording_urls(event.slug)
     with scopes_disabled():
@@ -186,18 +183,18 @@ def test_task_refresh_creates_links(mock_get, event, submission, schedule_with_t
 
 
 @pytest.mark.django_db
-@patch("pretalx_media_ccc_de.tasks.requests.get")
+@patch("pretalx_media_ccc_de.tasks.urllib3.request")
 def test_task_refresh_handles_missing_event(mock_get):
     task_refresh_recording_urls("nonexistent-event")
     mock_get.assert_not_called()
 
 
 @pytest.mark.django_db
-@patch("pretalx_media_ccc_de.tasks.requests.get")
+@patch("pretalx_media_ccc_de.tasks.urllib3.request")
 def test_task_refresh_handles_api_error(mock_get, event):
     event.settings.media_ccc_de_id = "testconf"
     mock_response = MagicMock()
-    mock_response.status_code = 404
+    mock_response.status = 404
     mock_get.return_value = mock_response
     result = task_refresh_recording_urls(event.slug)
     assert result is None
@@ -240,11 +237,11 @@ def test_recording_provider_signal(event):
 
 
 @pytest.mark.django_db
-@patch("pretalx_media_ccc_de.tasks.requests.get")
+@patch("pretalx_media_ccc_de.tasks.urllib3.request")
 def test_task_refresh_sets_default_id(mock_get, event):
     mock_response = MagicMock()
-    mock_response.status_code = 200
-    mock_response.text = json.dumps({"events": []})
+    mock_response.status = 200
+    mock_response.json.return_value = {"events": []}
     mock_get.return_value = mock_response
     task_refresh_recording_urls(event.slug)
     event.settings.flush()
@@ -252,14 +249,14 @@ def test_task_refresh_sets_default_id(mock_get, event):
 
 
 @pytest.mark.django_db
-@patch("pretalx_media_ccc_de.tasks.requests.get")
+@patch("pretalx_media_ccc_de.tasks.urllib3.request")
 def test_task_refresh_skips_events_without_frontend_link(
     mock_get, event, submission, schedule_with_talk
 ):
     event.settings.media_ccc_de_id = "testconf"
     mock_response = MagicMock()
-    mock_response.status_code = 200
-    mock_response.text = json.dumps({"events": [{"guid": "abc", "slug": "test-123"}]})
+    mock_response.status = 200
+    mock_response.json.return_value = {"events": [{"guid": "abc", "slug": "test-123"}]}
     mock_get.return_value = mock_response
     task_refresh_recording_urls(event.slug)
     with scopes_disabled():
