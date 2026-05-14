@@ -4,8 +4,10 @@ import pytest
 from django.core import management
 from django_scopes import scopes_disabled
 
+from pretalx.event.domain.event import initialise_event
 from pretalx.event.models import Event, Organiser, Team
 from pretalx.person.models import User
+from pretalx.schedule.domain.release import freeze_schedule
 from pretalx.schedule.models import Room
 from pretalx.submission.models import Submission, SubmissionStates, SubmissionType
 
@@ -45,6 +47,7 @@ def event(organiser):
             date_to=today + dt.timedelta(days=3),
             organiser=organiser,
         )
+        initialise_event(event)
         event.enable_plugin("pretalx_media_ccc_de")
         event.save()
         for team in organiser.teams.all():
@@ -122,4 +125,4 @@ def schedule_with_talk(event, submission, room):
             end=dt.datetime.combine(event.date_from, dt.time(10, 30), tzinfo=dt.UTC),
             is_visible=True,
         )
-        return event.wip_schedule.freeze("v1")[0]
+        return freeze_schedule(event.wip_schedule, "v1")[0]
