@@ -49,6 +49,7 @@ ignore = [".*", "tests/*", "justfile"]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "pretalx.common.settings.test_settings"
+django_find_project = false
 addopts = "--cov=pretalx_media_ccc_de --cov-report=term-missing:skip-covered --cov-config=pyproject.toml"
 
 [tool.coverage.run]
