@@ -1,12 +1,15 @@
+import datetime as dt
 from unittest.mock import MagicMock, patch
 
 import pytest
 from django.urls import reverse
+from django.utils.timezone import now
 from django_scopes import scope, scopes_disabled
 
+from pretalx_media_ccc_de.forms import MediaCCCDeUrlForm
 from pretalx_media_ccc_de.models import MediaCccDeLink
 from pretalx_media_ccc_de.recording import MediaCCCDe
-from pretalx_media_ccc_de.signals import media_ccc_de_provider
+from pretalx_media_ccc_de.signals import gather_media_ccc_de_urls, media_ccc_de_provider
 from pretalx_media_ccc_de.tasks import SubmissionFinder, task_refresh_recording_urls
 
 SETTINGS_URL_NAME = "plugins:pretalx_media_ccc_de:settings"
@@ -246,6 +249,90 @@ def test_task_refresh_sets_default_id(mock_get, event):
     task_refresh_recording_urls(event.slug)
     event.settings.flush()
     assert event.settings.media_ccc_de_id == event.slug
+
+
+@pytest.mark.django_db
+def test_url_form_without_event_returns_early():
+    form = MediaCCCDeUrlForm(event=None)
+    assert not form.fields
+
+
+@pytest.mark.django_db
+def test_orga_save_urls_invalid_url(orga_client, event, schedule_with_talk, submission):
+    url = reverse(SETTINGS_URL_NAME, kwargs={"event": event.slug})
+    response = orga_client.post(
+        url, {"action": "urls", f"video_id_{submission.code}": "not a url"}, follow=True
+    )
+    assert response.status_code == 200
+    with scopes_disabled():
+        assert not MediaCccDeLink.objects.filter(submission=submission).exists()
+
+
+@pytest.mark.django_db
+@patch("pretalx_media_ccc_de.signals.MediaCCCDe")
+def test_gather_calls_fill_for_active_event(mock_provider, event):
+    gather_media_ccc_de_urls(sender=None)
+    mock_provider.assert_called_once_with(event)
+    mock_provider.return_value.fill_recording_urls.assert_called_once()
+
+
+@pytest.mark.django_db
+@patch("pretalx_media_ccc_de.signals.MediaCCCDe")
+def test_gather_skips_event_without_plugin(mock_provider, event):
+    with scopes_disabled():
+        event.plugins = "media_ccc_de"
+        event.save()
+    gather_media_ccc_de_urls(sender=None)
+    mock_provider.assert_not_called()
+
+
+@pytest.mark.django_db
+@patch("pretalx_media_ccc_de.signals.MediaCCCDe")
+def test_gather_skips_future_event(mock_provider, event):
+    with scopes_disabled():
+        event.date_from = now().date() + dt.timedelta(days=1)
+        event.save()
+    gather_media_ccc_de_urls(sender=None)
+    mock_provider.assert_not_called()
+
+
+@pytest.mark.django_db
+@patch("pretalx_media_ccc_de.signals.MediaCCCDe")
+def test_gather_skips_long_finished_event(mock_provider, event):
+    with scopes_disabled():
+        today = now().date()
+        event.date_from = today - dt.timedelta(days=40)
+        event.date_to = today - dt.timedelta(days=37)
+        event.save()
+    gather_media_ccc_de_urls(sender=None)
+    mock_provider.assert_not_called()
+
+
+@pytest.mark.django_db
+@patch("pretalx_media_ccc_de.tasks.urllib3.request")
+def test_task_refresh_skips_unmatched_event(
+    mock_get, event, submission, schedule_with_talk
+):
+    event.settings.media_ccc_de_id = "testconf"
+    mock_response = MagicMock()
+    mock_response.status = 200
+    mock_response.json.return_value = {
+        "events": [
+            {
+                "guid": "no-match",
+                "link": "",
+                "slug": "talk-ZZZZZ",
+                "frontend_link": "https://media.ccc.de/v/nope",
+                "release_date": "2024-01-01T00:00:00Z",
+                "duration": 1,
+                "poster_url": "u",
+            }
+        ]
+    }
+    mock_get.return_value = mock_response
+    task_refresh_recording_urls(event.slug)
+    with scopes_disabled():
+        assert not MediaCccDeLink.objects.filter(submission=submission).exists()
 
 
 @pytest.mark.django_db
