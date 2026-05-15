@@ -2,17 +2,17 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/pretalx/pretalx-media-ccc-de/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
-| Name                                    |    Stmts |     Miss |   Branch |   BrPart |   Cover |   Missing |
-|---------------------------------------- | -------: | -------: | -------: | -------: | ------: | --------: |
-| pretalx\_media\_ccc\_de/\_\_init\_\_.py |        1 |        0 |        0 |        0 |    100% |           |
-| pretalx\_media\_ccc\_de/apps.py         |       15 |        0 |        0 |        0 |    100% |           |
-| pretalx\_media\_ccc\_de/forms.py        |       35 |        1 |       12 |        1 |     96% |        27 |
-| pretalx\_media\_ccc\_de/models.py       |       12 |        0 |        0 |        0 |    100% |           |
-| pretalx\_media\_ccc\_de/recording.py    |        9 |        0 |        2 |        0 |    100% |           |
-| pretalx\_media\_ccc\_de/signals.py      |       30 |       10 |        8 |        0 |     58% |     23-37 |
-| pretalx\_media\_ccc\_de/tasks.py        |       47 |        0 |       14 |        1 |     98% |   42-\>37 |
-| pretalx\_media\_ccc\_de/views.py        |       41 |        2 |        8 |        1 |     94% |     35-36 |
-| **TOTAL**                               |  **190** |   **13** |   **44** |    **3** | **91%** |           |
+| Name                                    |    Stmts |     Miss |   Branch |   BrPart |    Cover |   Missing |
+|---------------------------------------- | -------: | -------: | -------: | -------: | -------: | --------: |
+| pretalx\_media\_ccc\_de/\_\_init\_\_.py |        1 |        0 |        0 |        0 |     100% |           |
+| pretalx\_media\_ccc\_de/apps.py         |       15 |        0 |        0 |        0 |     100% |           |
+| pretalx\_media\_ccc\_de/forms.py        |       35 |        0 |       12 |        0 |     100% |           |
+| pretalx\_media\_ccc\_de/models.py       |       12 |        0 |        0 |        0 |     100% |           |
+| pretalx\_media\_ccc\_de/recording.py    |        9 |        0 |        2 |        0 |     100% |           |
+| pretalx\_media\_ccc\_de/signals.py      |       32 |        0 |       10 |        0 |     100% |           |
+| pretalx\_media\_ccc\_de/tasks.py        |       46 |        0 |       14 |        0 |     100% |           |
+| pretalx\_media\_ccc\_de/views.py        |       41 |        0 |        8 |        0 |     100% |           |
+| **TOTAL**                               |  **191** |    **0** |   **46** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
