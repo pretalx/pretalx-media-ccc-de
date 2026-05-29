@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import format_html
 
 
 class MediaCccDeLink(models.Model):
@@ -17,7 +18,10 @@ class MediaCccDeLink(models.Model):
 
     @property
     def iframe(self):
-        return f'<div class="embed-responsive embed-responsive-16by9"><iframe src="{self.url}/oembed" frameborder="0" allowfullscreen></iframe></div>'
+        return format_html(
+            '<div class="embed-responsive embed-responsive-16by9"><iframe src="{}/oembed" frameborder="0" allowfullscreen></iframe></div>',
+            self.url,
+        )
 
     def serialize(self):
         return {

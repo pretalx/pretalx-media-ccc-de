@@ -117,6 +117,21 @@ def test_media_ccc_de_link_iframe(submission):
 
 
 @pytest.mark.django_db
+def test_media_ccc_de_link_iframe_escapes_url(submission):
+    # The iframe markup is rendered with |safe on the public talk page, so the
+    # url (organiser/feed-controlled) must be HTML-escaped at build time.
+    with scopes_disabled():
+        link = MediaCccDeLink.objects.create(
+            submission=submission,
+            url='https://media.ccc.de/x"></iframe><script>alert(1)</script',
+        )
+    iframe = link.iframe
+    assert "<script>" not in iframe
+    assert '"></iframe>' not in iframe
+    assert "&lt;script&gt;" in iframe
+
+
+@pytest.mark.django_db
 def test_media_ccc_de_link_serialize(submission):
     with scopes_disabled():
         link = MediaCccDeLink.objects.create(
