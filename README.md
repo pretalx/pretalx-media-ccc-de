@@ -7,12 +7,12 @@
 | pretalx\_media\_ccc\_de/\_\_init\_\_.py |        1 |        0 |        0 |        0 |     100% |           |
 | pretalx\_media\_ccc\_de/apps.py         |       15 |        0 |        0 |        0 |     100% |           |
 | pretalx\_media\_ccc\_de/forms.py        |       35 |        0 |       12 |        0 |     100% |           |
-| pretalx\_media\_ccc\_de/models.py       |       12 |        0 |        0 |        0 |     100% |           |
+| pretalx\_media\_ccc\_de/models.py       |       13 |        0 |        0 |        0 |     100% |           |
 | pretalx\_media\_ccc\_de/recording.py    |        9 |        0 |        2 |        0 |     100% |           |
 | pretalx\_media\_ccc\_de/signals.py      |       32 |        0 |       10 |        0 |     100% |           |
 | pretalx\_media\_ccc\_de/tasks.py        |       46 |        0 |       14 |        0 |     100% |           |
 | pretalx\_media\_ccc\_de/views.py        |       41 |        0 |        8 |        0 |     100% |           |
-| **TOTAL**                               |  **191** |    **0** |   **46** |    **0** | **100%** |           |
+| **TOTAL**                               |  **192** |    **0** |   **46** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
