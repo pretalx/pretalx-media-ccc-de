@@ -23,30 +23,35 @@ Development setup
 5. Restart your local pretalx server. This plugin should show up in the plugin list shown on startup in the console.
    You can now use the plugin from this repository for your events by enabling it in the 'plugins' tab in the settings.
 
-This project uses `just`_ as a task runner and `uv`_ for dependency management.
+Development commands
+~~~~~~~~~~~~~~~~~~~~
 
-Code style
-~~~~~~~~~~
+This plugin uses `just`_ as a task runner and `uv`_ for dependency management.
+Run ``just`` with no arguments to list every available command. The most useful ones
+are:
 
-To check your plugin for code style violations, run::
+``just fmt``
+    Auto-format and lint the code.
 
-    just fmt-check
+``just test``
+    Run the full test suite with pytest.
 
-To auto-fix formatting issues, run::
+Installing pretalx
+~~~~~~~~~~~~~~~~~~~~
 
-    just fmt
+The tests need pretalx installed in the environment. ``just test`` handles this for
+you: if pretalx cannot be imported, it installs the latest version from git before
+running the test suite.
 
-Testing
-~~~~~~~
+If you already have a development version of pretalx around (for example if you want
+to test your changes against a specific commit or branch of pretalx), you can also
+install pretalx up front yourself:
 
-To run the test suite, run::
+``just install-pretalx-local /path/to/pretalx``
+    Install pretalx from a local checkout as an editable install.
 
-    just test
-
-This will automatically install pretalx if it's not already present. If you want
-to test against a local pretalx checkout instead, run::
-
-    just install-pretalx-local /path/to/pretalx
+``just install-pretalx``
+    Install the latest pretalx from git (runs before tests if no pretalx is installed).
 
 
 License
