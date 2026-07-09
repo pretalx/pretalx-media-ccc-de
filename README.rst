@@ -1,13 +1,27 @@
 media.ccc.de recordings
 ==========================
 
-.. image:: https://raw.githubusercontent.com/pretalx/pretalx-media-ccc-de/python-coverage-comment-action-data/badge.svg
-   :target: https://htmlpreview.github.io/?https://github.com/pretalx/pretalx-media-ccc-de/blob/python-coverage-comment-action-data/htmlcov/index.html
-   :alt: Coverage
+.. image:: https://img.shields.io/pypi/v/pretalx-media-ccc-de.svg
+   :target: https://pypi.org/project/pretalx-media-ccc-de/
+   :alt: PyPI version
 
 This is a plugin for `pretalx`_ that provides an integration with media.ccc.de, allowing you to embed recordings on talk pages.
 
 .. image:: https://github.com/pretalx/pretalx-media-ccc-de/blob/main/assets/screenshot.png?raw=true
+
+Installation
+------------
+
+Install the plugin with pip, in the same environment as your pretalx
+installation::
+
+    (env)$ python -m pip install pretalx-media-ccc-de
+
+Afterwards, run ``migrate`` and ``rebuild`` and restart your pretalx services,
+just like after any pretalx update (see `performing updates`_ in the
+administrator documentation).
+
+You can then enable the plugin under "Settings → Plugins" in your event settings.
 
 Development setup
 -----------------
@@ -66,3 +80,4 @@ Released under the terms of the Apache License 2.0
 .. _pretalx development setup: https://docs.pretalx.org/en/latest/developer/setup.html
 .. _just: https://just.systems/
 .. _uv: https://docs.astral.sh/uv/
+.. _performing updates: https://docs.pretalx.org/administrator/maintenance/#performing-updates
