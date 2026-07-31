@@ -79,6 +79,7 @@ ignore = [
   "ARG",     # Unused method arguments are often ok
   "C901",    # We do do complexity
   "COM812",  # Trailing commas are formatter territory
+  "CPY",     # We do not use copyright header notices
   "D",       # We do not enforce docstyles
   "DJ001",   # We live in a state of sin
   "E501",    # Long lines are formatter territory
