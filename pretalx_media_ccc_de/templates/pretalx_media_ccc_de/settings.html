@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-    <h2>{% trans "Set up media.ccc.de sync" %}</h2>
+    <h2 class="page-heading">{% trans "Set up media.ccc.de sync" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form }}
