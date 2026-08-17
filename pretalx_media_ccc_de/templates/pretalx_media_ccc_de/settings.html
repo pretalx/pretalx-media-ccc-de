@@ -6,34 +6,12 @@
     <form method="post">
         {% csrf_token %}
         {{ form }}
-        <div class="submit-group panel">
-            <span></span>
-            <span class="d-flex flex-row-reverse">
-                <button
-                    type="submit"
-                    class="btn btn-success btn-lg"
-                    name="action"
-                    value="save"
-                >
-                    <i class="fa fa-check"></i>
-                    {% trans "Save" %}
-                </button>
-                <button
-                    name="action"
-                    value="regenerate"
-                    type="submit"
-                    class="btn btn-info btn-lg mr-2"
-                >
-                    <i class="fa fa-refresh"></i>
-                    {% trans "Check for new talks" %}
-                </button>
-            </span>
-        </div>
+        {% include "orga/includes/submit_row.html" with submit_buttons=settings_buttons %}
     </form>
 
     {% if url_form %}
         <h3>{% trans "Change URLs" %}</h3>
 
-        {% include "orga/includes/base_form.html" with form=url_form %}
+        {% include "orga/includes/base_form.html" with form=url_form submit_buttons=url_form_buttons %}
     {% endif %}
 {% endblock %}

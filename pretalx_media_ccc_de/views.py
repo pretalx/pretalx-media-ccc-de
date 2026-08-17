@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import FormView
 
+from pretalx.common.ui import Button
 from pretalx.common.views.mixins import PermissionRequired
 
 from .forms import MediaCCCDeSettingsForm, MediaCCCDeUrlForm
@@ -49,8 +50,18 @@ class MediaCCCDeSettings(PermissionRequired, FormView):
 
     def get_context_data(self, *args, **kwargs):
         kwargs = super().get_context_data(**kwargs)
+        kwargs["settings_buttons"] = [
+            Button(name="action", value="save"),
+            Button(
+                name="action",
+                value="regenerate",
+                label=_("Check for new talks"),
+                color="secondary",
+            ),
+        ]
         if self.request.event.current_schedule:
             kwargs["url_form"] = MediaCCCDeUrlForm(event=self.request.event)
+            kwargs["url_form_buttons"] = [Button(name="action", value="urls")]
         else:
             kwargs["url_forms"] = []
         return kwargs
