@@ -7,6 +7,7 @@ from django_scopes import scopes_disabled
 from pretalx.event.domain.event import initialise_event
 from pretalx.event.domain.plugins import enable_plugin
 from pretalx.event.models import Event, Organiser, Team
+from pretalx.person.enums import EmailVerificationState
 from pretalx.person.models import User
 from pretalx.schedule.domain.release import freeze_schedule
 from pretalx.schedule.models import Room
@@ -60,7 +61,8 @@ def event(organiser):
 def orga_user(event):
     with scopes_disabled():
         user = User.objects.create_user(
-            password="orgapassw0rd", email="orgauser@orga.org", name="Orga User"
+            password="orgapassw0rd", email="orgauser@orga.org", name="Orga User",
+            email_verification_state=EmailVerificationState.VERIFIED,
         )
         team = event.organiser.teams.filter(
             can_change_organiser_settings=True, is_reviewer=False
@@ -74,7 +76,8 @@ def orga_user(event):
 def review_user(event):
     with scopes_disabled():
         user = User.objects.create_user(
-            password="reviewpassw0rd", email="reviewuser@orga.org", name="Review User"
+            password="reviewpassw0rd", email="reviewuser@orga.org", name="Review User",
+            email_verification_state=EmailVerificationState.VERIFIED,
         )
         team = event.organiser.teams.filter(
             can_change_organiser_settings=False, is_reviewer=True
