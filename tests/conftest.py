@@ -61,7 +61,9 @@ def event(organiser):
 def orga_user(event):
     with scopes_disabled():
         user = User.objects.create_user(
-            password="orgapassw0rd", email="orgauser@orga.org", name="Orga User",
+            password="orgapassw0rd",
+            email="orgauser@orga.org",
+            name="Orga User",
             email_verification_state=EmailVerificationState.VERIFIED,
         )
         team = event.organiser.teams.filter(
@@ -76,7 +78,9 @@ def orga_user(event):
 def review_user(event):
     with scopes_disabled():
         user = User.objects.create_user(
-            password="reviewpassw0rd", email="reviewuser@orga.org", name="Review User",
+            password="reviewpassw0rd",
+            email="reviewuser@orga.org",
+            name="Review User",
             email_verification_state=EmailVerificationState.VERIFIED,
         )
         team = event.organiser.teams.filter(
