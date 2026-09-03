@@ -1,5 +1,6 @@
 from pretalx.agenda.recording import BaseRecordingProvider
 
+from .models import MediaCccDeLink
 from .tasks import task_refresh_recording_urls
 
 
@@ -10,6 +11,6 @@ class MediaCCCDe(BaseRecordingProvider):
         )
 
     def get_recording(self, submission):
-        data = getattr(submission, "media_ccc_de_link", None)
+        data = MediaCccDeLink.objects.filter(submission=submission).first()
         if data:
             return {"iframe": data.iframe, "csp_header": "https://media.ccc.de"}

@@ -27,13 +27,15 @@ class MediaCCCDeUrlForm(forms.Form):
             return
 
         self.talks = (
-            event.current_schedule.talks.all()
+            event.current_schedule.talks.select_related("submission__event")
             .filter(is_visible=True, submission__isnull=False)
             .order_by("start")
         )
         video_data = {
             v.submission.code: v.url
-            for v in MediaCccDeLink.objects.filter(submission__event=event)
+            for v in MediaCccDeLink.objects.filter(
+                submission__event=event
+            ).select_related("submission")
         }
         s = _("Go to video.")
         p = _("Go to talk page.")

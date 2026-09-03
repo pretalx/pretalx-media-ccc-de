@@ -176,7 +176,7 @@ def test_recording_provider_get_recording_without_link(event, submission):
 def test_task_refresh_creates_links(mock_get, event, submission, schedule_with_talk):
     event.settings.media_ccc_de_id = "testconf"
     with scopes_disabled():
-        slot = schedule_with_talk.talks.first()
+        slot = schedule_with_talk.talks.select_related("submission__event").first()
     mock_response = MagicMock()
     mock_response.status = 200
     mock_response.json.return_value = {
