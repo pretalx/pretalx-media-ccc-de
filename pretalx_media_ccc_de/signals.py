@@ -22,11 +22,9 @@ def media_ccc_de_provider(sender, **kwargs):
 @minimum_interval(minutes_after_success=60)
 def gather_media_ccc_de_urls(sender, **kwargs):
     with scopes_disabled():
-        active_events = Event.objects.filter(plugins__icontains="media_ccc_de")
+        active_events = Event.objects.with_plugin("pretalx_media_ccc_de")
     for event in active_events:
         with scope(event=event):
-            if "pretalx_media_ccc_de" not in event.plugin_list:
-                continue
             if now().date() < event.date_from:
                 continue
             if now().date() - event.date_to > dt.timedelta(days=7):
