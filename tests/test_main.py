@@ -6,6 +6,10 @@ from django.urls import reverse
 from django.utils.timezone import now
 from django_scopes import scope, scopes_disabled
 
+from pretalx.event.domain.event import copy_event_data, initialise_event
+from pretalx.event.domain.plugins import enable_plugin
+from pretalx.event.models import Event
+
 from pretalx_media_ccc_de.forms import MediaCCCDeUrlForm
 from pretalx_media_ccc_de.models import MediaCccDeLink
 from pretalx_media_ccc_de.recording import MediaCCCDe
@@ -363,3 +367,27 @@ def test_task_refresh_skips_events_without_frontend_link(
     task_refresh_recording_urls(event.slug)
     with scopes_disabled():
         assert not MediaCccDeLink.objects.filter(submission=submission).exists()
+
+
+def _copied_event(event, plugin):
+    with scopes_disabled():
+        new_event = Event.objects.create(
+            name="Copied event",
+            slug="copied",
+            email="orga@orga.org",
+            date_from=event.date_from + dt.timedelta(days=7),
+            date_to=event.date_to + dt.timedelta(days=7),
+            organiser=event.organiser,
+        )
+        initialise_event(new_event)
+        enable_plugin(new_event, plugin)
+        copy_event_data(event=new_event, source=event)
+    return new_event
+
+
+@pytest.mark.django_db
+def test_event_copy_clears_conference_id(event):
+    event.settings.media_ccc_de_id = "oldconf"
+    new_event = _copied_event(event, "pretalx_media_ccc_de")
+    assert new_event.settings.media_ccc_de_id is None
+    assert event.settings.media_ccc_de_id == "oldconf"

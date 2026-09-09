@@ -8,7 +8,7 @@ from django_scopes import scope, scopes_disabled
 from pretalx.agenda.signals import register_recording_provider
 from pretalx.common.signals import minimum_interval, periodic_task
 from pretalx.event.models import Event
-from pretalx.orga.signals import nav_event_settings
+from pretalx.orga.signals import event_copy_data, nav_event_settings
 
 from .recording import MediaCCCDe
 
@@ -47,3 +47,8 @@ def media_ccc_de_settings(sender, request, **kwargs):
             == "plugins:pretalx_media_ccc_de:settings",
         }
     ]
+
+
+@receiver(event_copy_data, dispatch_uid="media_ccc_de_copy_data")
+def clear_copied_conference_id(sender, **kwargs):
+    sender.settings.delete("media_ccc_de_id")
